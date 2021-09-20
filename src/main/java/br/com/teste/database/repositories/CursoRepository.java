@@ -9,5 +9,11 @@ import br.com.teste.database.entities.Curso;
 public interface CursoRepository extends JpaRepository<Curso, Integer>{
 	
 	List<Curso> findCursoByNome(String nome);
+	
+	List<Curso> findCursoByNomeContaining(String valor);
+	
+	List<Curso> findCursoByNomeLike(String valor);
+	
+	List<Curso> findCursoByNomeLikeIgnoreCase(String valor);
 
 }

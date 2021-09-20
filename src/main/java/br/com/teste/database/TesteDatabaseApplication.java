@@ -24,15 +24,19 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Curso curso1 = new Curso("Graduação TI");
-		Curso curso2 = new Curso("Graduação Engenharia");
-		Curso curso3 = new Curso("Graduação em Administração");
-		Curso curso4 = new Curso("Graduação Educação Física");		
+		Curso curso1 = new Curso("Graduação em TI");
+		Curso curso2 = new Curso("Graduação em Economia");
+		Curso curso3 = new Curso("Graduacao em Administração");
+		Curso curso4 = new Curso("Graduação em Educação Física");		
+		Curso curso5 = new Curso("Graduação em Educação Continuada");
+		Curso curso6 = new Curso("Graduação em educação Alternativa");
 		
 		salvarCurso(curso1);
 		salvarCurso(curso2);
 		salvarCurso(curso3);
 		salvarCurso(curso4);
+		salvarCurso(curso5);
+		salvarCurso(curso6);
 		
 //		deletarCurso(curso2);
 //		deletarCursoPorId(3);
@@ -43,8 +47,17 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 		
 //		countCurso();
 		
-		List<Curso> ListcursoPorNome = findCursoByNome(curso2.getNome());
-		imprimirValoresLista(ListcursoPorNome);
+//		List<Curso> listcursoPorNome = findCursoByNome(curso2.getNome());		
+//		imprimirValoresLista(listcursoPorNome);
+		
+//		List<Curso> listCursoContaining = findbyContaining("TI");
+//		imprimirValoresLista(listCursoContaining);
+		
+//		List<Curso> listCursoPorNomeLike = findCursoPorNomeLike("%Grad");
+//		imprimirValoresLista(listCursoPorNomeLike);
+		
+		List<Curso> listCursoPorNomeLikeIgnoreCase = findCursoPorNomeLikeIgnoreCaseSensitive("%Educação%");
+		imprimirValoresLista(listCursoPorNomeLikeIgnoreCase);
 		
 	}
 	
@@ -64,9 +77,9 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 		return  cursoRepository.findAll();		
 	}
 	
-	public void imprimirValoresLista(List<Curso> listaCursos) {
+	public void imprimirValoresLista(List<Curso> lista) {
 		
-		listaCursos.forEach(curso -> System.out.println(curso));		
+		lista.forEach(curso -> System.out.println(curso));		
 		
 	}
 	
@@ -81,7 +94,20 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 		System.out.println("Total de cursos: (" + cursoRepository.count() + ")");
 	}
 
-	public List<Curso> findCursoByNome(String nome){
+	public List<Curso> findCursoPorNome(String nome){
 		return cursoRepository.findCursoByNome(nome);
 	}
+	
+	public List<Curso> findCursoPorNomeContaining(String valor){
+		return cursoRepository.findCursoByNomeContaining(valor);		
+	}
+
+	public List<Curso> findCursoPorNomeLike(String valor){
+		return cursoRepository.findCursoByNomeLike(valor);
+	}
+
+	public List<Curso> findCursoPorNomeLikeIgnoreCaseSensitive(String valor){
+		return cursoRepository.findCursoByNomeLikeIgnoreCase(valor);
+	}
 }
+
