@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "curso_faculdade")
@@ -28,8 +29,9 @@ public class Curso {
 	@Column(name = "dt_criacao")
 	@CreationTimestamp
 	private LocalDateTime dataCriacao;
-	
+		
 	@Column(name = "dt_atualizacao")
+	@UpdateTimestamp
 	private LocalDateTime dataAtualizacao;
 
 	public Curso() {

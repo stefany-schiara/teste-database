@@ -38,6 +38,12 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 		salvarCurso(curso5);
 		salvarCurso(curso6);
 		
+		System.out.println("Aguardando 3 segundos...");
+		Thread.sleep(3000);
+		
+		curso6.setNome("Graduação em educação Física - Alterada");
+		salvarCurso(curso6);
+		
 //		deletarCurso(curso2);
 //		deletarCursoPorId(3);
 		
@@ -68,8 +74,8 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 //		List<String> listCursoAreaInformada = findCursoPorAreaInformada("Exatas");
 //		listCursoAreaInformada.forEach(curso -> System.out.println(curso));
 		
-		List<String> listCursoAreaInformada = findCursoByQueryParametros(curso3.getArea(), curso3.getNome());
-		listCursoAreaInformada.forEach(curso -> System.out.println(curso));
+//		List<String> listCursoAreaInformada = findCursoByQueryParametros(curso3.getArea(), curso3.getNome());
+//		listCursoAreaInformada.forEach(curso -> System.out.println(curso));
 		
 		List<String> listCursoAreaInformadaPorIndice = findCursoByQueryParametrosPorIndice(curso3.getArea(), curso3.getNome());
 		listCursoAreaInformadaPorIndice.forEach(curso -> System.out.println(curso));
