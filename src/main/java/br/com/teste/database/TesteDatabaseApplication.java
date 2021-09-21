@@ -56,8 +56,11 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 //		List<Curso> listCursoPorNomeLike = findCursoPorNomeLike("%Grad");
 //		imprimirValoresLista(listCursoPorNomeLike);
 		
-		List<Curso> listCursoPorNomeLikeIgnoreCase = findCursoPorNomeLikeIgnoreCaseSensitive("%Educação%");
-		imprimirValoresLista(listCursoPorNomeLikeIgnoreCase);
+//		List<Curso> listCursoPorNomeLikeIgnoreCase = findCursoPorNomeLikeIgnoreCaseSensitive("%Educação%");
+//		imprimirValoresLista(listCursoPorNomeLikeIgnoreCase);
+		
+		List<Curso> listCursoPorQuery = findCursoPorQuery();
+		imprimirValoresLista(listCursoPorQuery);
 		
 	}
 	
@@ -108,6 +111,10 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 
 	public List<Curso> findCursoPorNomeLikeIgnoreCaseSensitive(String valor){
 		return cursoRepository.findCursoByNomeLikeIgnoreCase(valor);
+	}
+
+	public List<Curso> findCursoPorQuery(){
+		return cursoRepository.findCursoByQuery();
 	}
 }
 
