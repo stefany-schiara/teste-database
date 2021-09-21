@@ -24,12 +24,12 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Curso curso1 = new Curso("Graduação em TI");
-		Curso curso2 = new Curso("Graduação em Economia");
-		Curso curso3 = new Curso("Graduacao em Administração");
-		Curso curso4 = new Curso("Graduação em Educação Física");		
-		Curso curso5 = new Curso("Graduação em Educação Continuada");
-		Curso curso6 = new Curso("Graduação em educação Alternativa");
+		Curso curso1 = new Curso("Graduação em TI", "Exatas");
+		Curso curso2 = new Curso("Graduação em Economia", "Humanas");
+		Curso curso3 = new Curso("Graduacao em Administração", "Humanas");
+		Curso curso4 = new Curso("Graduação em Educação Física", "Humanas");		
+		Curso curso5 = new Curso("Graduação em Educação Continuada", "Humanas");
+		Curso curso6 = new Curso("Graduação em educação Física", "Exatas");
 		
 		salvarCurso(curso1);
 		salvarCurso(curso2);
@@ -59,8 +59,22 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 //		List<Curso> listCursoPorNomeLikeIgnoreCase = findCursoPorNomeLikeIgnoreCaseSensitive("%Educação%");
 //		imprimirValoresLista(listCursoPorNomeLikeIgnoreCase);
 		
-		List<Curso> listCursoPorQuery = findCursoPorQuery();
-		imprimirValoresLista(listCursoPorQuery);
+//		List<Curso> listCursoPorQuery = findCursoPorQuery();
+//		imprimirValoresLista(listCursoPorQuery);
+		
+//		List<Curso> listCursoAreaPorQuery = findCursoPorAreaQuery();
+//		imprimirValoresLista(listCursoAreaPorQuery);
+		
+//		List<String> listCursoAreaInformada = findCursoPorAreaInformada("Exatas");
+//		listCursoAreaInformada.forEach(curso -> System.out.println(curso));
+		
+		List<String> listCursoAreaInformada = findCursoByQueryParametros(curso3.getArea(), curso3.getNome());
+		listCursoAreaInformada.forEach(curso -> System.out.println(curso));
+		
+		List<String> listCursoAreaInformadaPorIndice = findCursoByQueryParametrosPorIndice(curso3.getArea(), curso3.getNome());
+		listCursoAreaInformadaPorIndice.forEach(curso -> System.out.println(curso));
+		
+		
 		
 	}
 	
@@ -116,5 +130,23 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 	public List<Curso> findCursoPorQuery(){
 		return cursoRepository.findCursoByQuery();
 	}
+	
+	public List<Curso> findCursoPorAreaQuery(){
+		return cursoRepository.findCursoByQueryArea();
+	}
+
+	public List<String> findCursoPorAreaInformada(String area){
+		return cursoRepository.findCursoByQueryAreaInformada(area);
+	}
+
+	public List<String> findCursoByQueryParametros(String area, String nome){
+		return cursoRepository.findCursoByQueryParametros(area, nome);
+	}
+	
+	public List<String> findCursoByQueryParametrosPorIndice(String area, String nome){
+		return cursoRepository.findCursoByQueryParametrosPorIndice(area, nome);
+	}
+	
+	
 }
 
