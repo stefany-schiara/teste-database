@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PostPersist;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,6 +34,14 @@ public class Curso {
 	@Column(name = "dt_atualizacao")
 	@UpdateTimestamp
 	private LocalDateTime dataAtualizacao;
+	
+	@Column(name = "usuario")
+	private String usuario;
+	
+	@PostPersist
+	private void aposPersistirDados() {
+		this.nome = this.nome + "POST";
+	}
 
 	public Curso() {
 
@@ -66,6 +75,30 @@ public class Curso {
 
 	public void setArea(String area) {
 		this.area = area;
+	}	
+	
+	public LocalDateTime getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(LocalDateTime dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public LocalDateTime getDataAtualizacao() {
+		return dataAtualizacao;
+	}
+
+	public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
+	}	
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
