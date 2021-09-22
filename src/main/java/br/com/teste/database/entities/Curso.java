@@ -1,5 +1,6 @@
 package br.com.teste.database.entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -8,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PostPersist;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -38,10 +41,18 @@ public class Curso {
 	@Column(name = "usuario")
 	private String usuario;
 	
+	@Transient
+	private BigDecimal calculoValorCurso;
+	
+	@PrePersist
+	private void antesDePersistirDados() {
+		this.usuario = "Admin";
+	}
+	
 	@PostPersist
 	private void aposPersistirDados() {
-		this.nome = this.nome + "POST";
-	}
+		this.nome = this.nome + " POST";
+	}	
 
 	public Curso() {
 
@@ -99,6 +110,14 @@ public class Curso {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	public BigDecimal getCalculoValorCurso() {
+		return calculoValorCurso;
+	}
+
+	public void setCalculoValorCurso(BigDecimal calculoValorCurso) {
+		this.calculoValorCurso = calculoValorCurso;
 	}
 
 	@Override
