@@ -353,14 +353,13 @@ public class Curso {
 
 }
 ```
-@Transient -  Anotação utilizada para definir que um campo não será persistido no banco, é como se fosse um campo que guardasse valores 
-emporários, como por exemplo, você precisa exibir um cálculo para o usuário, mas não precisa salvar esse cálculo em uma coluna na base de dados, 
-mas apenas o valor final, você pode criar o campo e anotar ele com @Transient, assim, não será salvo no banco, nem será criada uma coluna para este campo.
+@Transient -  Anotação utilizada para definir que um campo não será persistido no banco, é como se fosse um campo que guardasse valores temporários, como por exemplo, você precisa exibir um cálculo para o usuário, mas não precisa salvar esse cálculo em uma coluna na base de dados, mas apenas o valor final, você pode criar o campo e anotar ele com @Transient, assim, não será salvo no banco, nem será criada uma coluna para este campo.
 Ex:
-
+```
 @Entity
 @Table(name = "curso_faculdade")
-public class Curso {        
+public class Curso {    
+    
     @Column(name = "dt_atualizacao")
     @UpdateTimestamp 
     private LocalDateTime dataAtualizacao;
@@ -372,3 +371,4 @@ public class Curso {
     private BigDecimal calculoValorCurso;
 
 }
+```
