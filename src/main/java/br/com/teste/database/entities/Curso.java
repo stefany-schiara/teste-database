@@ -12,6 +12,8 @@ import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -39,6 +41,8 @@ public class Curso {
 	private LocalDateTime dataAtualizacao;
 	
 	@Column(name = "usuario")
+	@NotNull(message = "O campo usuário não pode ser nulo")
+	@NotBlank(message = "O valor do campo usuário não pode branco")
 	private String usuario;
 	
 	@Transient
