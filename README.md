@@ -26,28 +26,28 @@ através dos imports.
 @Table - Anotação utilizada para definir propriedades de uma tabela, nesse caso, o nome da classe poderá ser diferente 
 do nome da tabela utilizando:
 
-		@Table(name = "nome_da_tabela")
+        @Table(name = "nome_da_tabela")
 
 Caso  necessário, você pode até mapear o schema:
 
- 	 @Table(name = "nome_da_tabela", schema = "nome_do_schema")
+ 	@Table(name = "nome_da_tabela", schema = "nome_do_schema")
 
 Obs: Essa anotação também é utilizada na linha acima do nome da classe.
 
 @GeneratedValue - Anotação utilizada para mapear a propriedade da sua tabela que é um id,
 você vai definir a estratégia que essa coluna adotará: 
 
-		GenerationType.AUTO: Valor padrão, deixa com o provedor de persistência a escolha da estratégia mais adequada de acordo com o banco de dados.
+GenerationType.AUTO: Valor padrão, deixa com o provedor de persistência a escolha da estratégia mais adequada de acordo com o banco de dados.
 
-		GenerationType.IDENTITY: Informamos ao provedor de persistência que os valores a serem atribuídos ao identificador único serão gerados pela coluna de 
-		auto incremento do banco de dados. Assim, um valor para o identificador é gerado para cada registro inserido no banco. Alguns bancos de dados podem não suportar essa opção.
+GenerationType.IDENTITY: Informamos ao provedor de persistência que os valores a serem atribuídos ao identificador único serão gerados pela coluna de 
+auto incremento do banco de dados. Assim, um valor para o identificador é gerado para cada registro inserido no banco. Alguns bancos de dados podem não suportar essa opção.
 
-		GenerationType.SEQUENCE: Informamos ao provedor de persistência que os valores serão gerados a partir de uma sequence. Caso não seja especificado um 
-		nome para a sequence, será utilizada uma sequence padrão, a qual será global, para todas as entidades. Caso uma sequence seja especificada, o provedor passará a adotar 
-		essa sequence para criação das chaves primárias. Alguns bancos de dados podem não suportar essa opção.
+GenerationType.SEQUENCE: Informamos ao provedor de persistência que os valores serão gerados a partir de uma sequence. Caso não seja especificado um 
+nome para a sequence, será utilizada uma sequence padrão, a qual será global, para todas as entidades. Caso uma sequence seja especificada, o provedor passará a adotar 
+essa sequence para criação das chaves primárias. Alguns bancos de dados podem não suportar essa opção.
 
-		GenerationType.TABLE: Com a opção TABLE é necessário criar uma tabela para gerenciar as chaves primárias. Por causa da sobrecarga de consultas necessárias 
-		para manter a tabela atualizada, essa opção é pouco recomendada.
+GenerationType.TABLE: Com a opção TABLE é necessário criar uma tabela para gerenciar as chaves primárias. Por causa da sobrecarga de consultas necessárias 
+para manter a tabela atualizada, essa opção é pouco recomendada.
 
 É fortemente recomendado utilizar os tipos: 
 GenerationType.SEQUENCE e GenerationType.IDENTITY, dado que os demais tem um problema de escalabilidade, o TABLE, por exemplo, não é uma pratica muito interessante, 
@@ -55,22 +55,22 @@ já que é criada uma tabela somente para manter ids.
 
 ---------------------- Exemplo de utilização: ---------------------- 
 
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private integer id;
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private integer id;
 
 ----------------------
 
-@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_nome_da_sequence") 
-@SequenceGenerator(name = "id_nome_da_sequence", sequenceName = "nome_da_sequence")
-private integer id;
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_nome_da_sequence") 
+        @SequenceGenerator(name = "id_nome_da_sequence", sequenceName = "nome_da_sequence")
+        private integer id;
 
 ----------------------
 
 @Column -  Anotação utilizada para definir propriedades de uma coluna,  como por exemplo: nome, tipo, se pode ou não ser nulo.
 Caso não definamos o nome, a coluna da tabela receberá o mesmo nome do atributo declarado na classe
 
-@Column(name = "nome_cuso")
-private String nome;
+        @Column(name = "nome_cuso")
+        private String nome;
 
 ------------------------------------------------------------------------------------------------------------------------------------
 
@@ -157,18 +157,19 @@ public classCursoService {
 FindBy<Field>
 Para utilizar um find com um criterio diferente de busca com um campo diferente, devemos ir na nossa interface do repository
 e adicionar um método novo com o nome findByNomeDoCampoDesejado.
-Ex:
-```
+Ex:        
+```        
 public interface CursoRepository extends JpaRepository<Curso, Integer> { 
-    List<Curso> findCursoByNome(String nome);
+  List<Curso> findCursoByNome(String nome);
 }
+        
 ```
 Utilização:
 ```
-@Autowired  
-CursoRepository cursoRepository;
+  @Autowired  
+  CursoRepository cursoRepository;
 
-cursoRepository.findCursoByNome(nome);
+  cursoRepository.findCursoByNome(nome);
 ```
 
 FindByCampoContaining
