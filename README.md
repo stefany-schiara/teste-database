@@ -360,8 +360,7 @@ Ex:
 
 @Entity
 @Table(name = "curso_faculdade")
-public class Curso {    
-    
+public class Curso {        
     @Column(name = "dt_atualizacao")
     @UpdateTimestamp 
     private LocalDateTime dataAtualizacao;
