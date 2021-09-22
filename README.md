@@ -329,6 +329,8 @@ public class Curso {
 }
 
 }
+        
+        
 ```
 
 @PrePersist -  Anotação utilizada para setar algum registro em uma linha no banco de dados, antes de um registro ser salvo .  
