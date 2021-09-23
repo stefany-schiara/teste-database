@@ -2,12 +2,15 @@ package br.com.teste.database.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PostPersist;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -24,6 +27,7 @@ public class Curso {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "curso_id")
 	private Integer id;
 
 	@Column(name = "nome_curso", nullable = false)
@@ -45,6 +49,9 @@ public class Curso {
 	@NotBlank(message = "O valor do campo usuário não pode branco")
 	private String usuario;
 	
+	@OneToMany(mappedBy = "curso")	
+	List<Aluno> alunos = new ArrayList<>();
+	
 	@Transient
 	private BigDecimal calculoValorCurso;
 	
@@ -59,7 +66,7 @@ public class Curso {
 	}	
 
 	public Curso() {
-
+		super();
 	}
 
 	public Curso(String nome, String area) {
