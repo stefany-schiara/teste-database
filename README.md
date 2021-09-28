@@ -374,3 +374,51 @@ public class Curso {
 
 }
 ```
+@NotNull -  Anotação utilizada para definir que um campo não poderá ser nulo, caso seja enviado um valor nulo, uma mensagem de erro será mostrada. É possível definir  uma mensagem personalizada.
+
+@NotBlank -  Anotação utilizada para definir que um campo não poderá ser nulo, caso seja enviado um valor nulo, uma mensagem de erro será mostrada. É possível definir  uma mensagem personalizada.
+```
+@Entity
+@Table(name = "curso_faculdade")
+public class Curso {
+ 
+    @Column(name = "usuario") 
+    @NotNull(message = "O campo usuário não pode ser nulo") 
+    @NotBlank(message = "O valor do campo usuário não pode branco") 
+    private String usuario;
+}
+```
+
+@OneToMany -  Anotação utilizada para mapear que uma coluna terá um relacionamento com outra tabela de "Um para muitos"
+no exemplo que estamos fazendo, na classe curso, estamos dizendo que 1 curso terá muitos alunos.
+
+@ManyToOne - Essa anotação é o contrário da acima, indica que no relacionamento entre duas tabelas é de "Muitos para Um"
+no exemplo: muitos alunos para 1 curso.
+
+Segue exemplo de como é feito esse mapeamento:
+Na classe aluno, vamos criar um relacionamento entre a tabela aluno e curso.
+```
+@Entity
+@Table(name = "aluno")
+public class Aluno {
+    
+    @ManyToOne
+    @JoinColumn(name = "curso_id") 
+    private Curso curso;
+}
+```
+No exemplo acima estou mapeando que eu vou pegar da tabela curso a coluna "curso_id" que será minha chave estrangeira na tabela aluno.
+
+Na classe curso, criamos a propriedade com @OneToMany, passando  o parâmetro "mappedBy" e passamos o valor "curso" que deve ser o mesmo nome da propriedade que criamos na classe aluno.
+```
+@Entity
+@Table(name = "curso_faculdade")
+public class Curso {
+
+    @OneToMany(mappedBy = "curso")	
+    List<Aluno> alunos = new ArrayList<>();
+
+}
+```
+
+Se só utilizarmos puramente as anotações @ManyToOne e @OneToMany, sem passar o @JoinColumn e o parâmetro mappedBy, o sistema criará uma terceira tabela só para guardar os relacionamentos, o que não é uma boa prática.
