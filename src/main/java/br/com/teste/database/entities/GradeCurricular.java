@@ -28,7 +28,39 @@ public class GradeCurricular {
 			referencedColumnName = "id_aluno"
 	)
 	private Aluno aluno;
-	
-	
+
+	public GradeCurricular() {
+		super();		
+	}
+
+	public GradeCurricular(String objetivo, Aluno aluno) {
+		super();
+		this.objetivo = objetivo;
+		this.aluno = aluno;
+	}
+
+	public Integer getIdGrade() {
+		return idGrade;
+	}
+
+	public void setIdGrade(Integer idGrade) {
+		this.idGrade = idGrade;
+	}
+
+	public String getObjetivo() {
+		return objetivo;
+	}
+
+	public void setObjetivo(String objetivo) {
+		this.objetivo = objetivo;
+	}
+
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}	
 
 }

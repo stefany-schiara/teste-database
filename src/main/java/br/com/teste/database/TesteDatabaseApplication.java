@@ -10,8 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.teste.database.entities.Aluno;
 import br.com.teste.database.entities.Curso;
+import br.com.teste.database.entities.GradeCurricular;
 import br.com.teste.database.repositories.AlunoRepository;
 import br.com.teste.database.repositories.CursoRepository;
+import br.com.teste.database.repositories.GradeCurricularRepository;
 
 @SpringBootApplication
 public class TesteDatabaseApplication implements CommandLineRunner{
@@ -21,6 +23,9 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 	
 	@Autowired
 	AlunoRepository alunoRepository;
+	
+	@Autowired
+	GradeCurricularRepository gradeCurricularRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TesteDatabaseApplication.class, args);
@@ -45,9 +50,17 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 		
 		Aluno aluno1 = new Aluno("Jose", curso1);
 		Aluno aluno2 = new Aluno("Aline", curso1);
+		Aluno aluno3 = new Aluno("Humberto", curso1);
 		
 		alunoRepository.save(aluno1);
 		alunoRepository.save(aluno2);
+		alunoRepository.save(aluno3);
+		
+		GradeCurricular grade1 = new GradeCurricular("Graduação em Games", aluno1);
+		GradeCurricular grade2 = new GradeCurricular("Graduação em Academia de Rua", aluno3);
+		
+		gradeCurricularRepository.save(grade1);
+		gradeCurricularRepository.save(grade2);
 		
 //		System.out.println("Aguardando 3 segundos...");
 //		Thread.sleep(3000);
