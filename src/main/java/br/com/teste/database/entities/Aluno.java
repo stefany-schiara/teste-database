@@ -26,11 +26,10 @@ public class Aluno {
 	private Curso curso;
 
 	public Aluno() {
-		super();
-		// TODO Auto-generated constructor stub
+		super();		
 	}
 
-	public Aluno(Integer id, String nome, Curso curso) {
+	public Aluno(String nome, Curso curso) {
 		super();	
 		this.nome = nome;
 		this.curso = curso;
