@@ -422,3 +422,29 @@ public class Curso {
 ```
 
 Se só utilizarmos puramente as anotações @ManyToOne e @OneToMany, sem passar o @JoinColumn e o parâmetro mappedBy, o sistema criará uma terceira tabela só para guardar os relacionamentos, o que não é uma boa prática.
+        
+@OneToOne -  Anotação utilizada para mapear que uma coluna terá um relacionamento com outra tabela de "Um para Um".
+No exemplo que estamos fazendo, na classe GradeCurricular, estamos dizendo que 1 aluno terá 1 grade curricular e vice-versa.
+```
+Entity
+@Table(name = "grade")
+public class GradeCurricular {
+	
+	@Id
+	@Column(name = "id_grade")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer idGrade;
+	
+	@Column(name = "objetivo")
+	private String objetivo;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(
+	    name = "id_aluno",   // aqui você cria um nome a vontade, que será o nome da coluna com a chave estrangeira
+	    referencedColumnName = "id_aluno" // aqui você coloca o nome da coluna da outra tabela que será referenciada que pertence à tabela de aluno.
+	)
+	private Aluno aluno;
+}
+```
+
+@JoinColumn -  Anotação utilizada para informar quem é o dono da relação entre as tabelas, ou seja, no caso acima, a tabela "grade" vai receber uma coluna com a chave estrangeira "id_aluno"
