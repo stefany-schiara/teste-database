@@ -1,7 +1,9 @@
 package br.com.teste.database;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,9 +13,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.teste.database.entities.Aluno;
 import br.com.teste.database.entities.Curso;
 import br.com.teste.database.entities.GradeCurricular;
+import br.com.teste.database.entities.Materia;
 import br.com.teste.database.repositories.AlunoRepository;
 import br.com.teste.database.repositories.CursoRepository;
 import br.com.teste.database.repositories.GradeCurricularRepository;
+import br.com.teste.database.repositories.MateriaRepository;
 
 @SpringBootApplication
 public class TesteDatabaseApplication implements CommandLineRunner{
@@ -26,6 +30,9 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 	
 	@Autowired
 	GradeCurricularRepository gradeCurricularRepository;
+	
+	@Autowired
+	MateriaRepository materiaRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(TesteDatabaseApplication.class, args);
@@ -61,6 +68,15 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 		
 		gradeCurricularRepository.save(grade1);
 		gradeCurricularRepository.save(grade2);
+		
+		Set<GradeCurricular> gradeMateria1 = new HashSet<>();
+		gradeMateria1.add(grade1);
+		Materia materia1 = new Materia("Design", gradeMateria1);
+		
+		Materia materia2 = new Materia("Cultura e Moda", gradeMateria1);
+		
+		materiaRepository.save(materia1);		
+		materiaRepository.save(materia2);
 		
 //		System.out.println("Aguardando 3 segundos...");
 //		Thread.sleep(3000);
@@ -101,10 +117,8 @@ public class TesteDatabaseApplication implements CommandLineRunner{
 //		List<String> listCursoAreaInformada = findCursoByQueryParametros(curso3.getArea(), curso3.getNome());
 //		listCursoAreaInformada.forEach(curso -> System.out.println(curso));
 		
-		List<String> listCursoAreaInformadaPorIndice = findCursoByQueryParametrosPorIndice(curso3.getArea(), curso3.getNome());
-		listCursoAreaInformadaPorIndice.forEach(curso -> System.out.println(curso));
-		
-		
+//		List<String> listCursoAreaInformadaPorIndice = findCursoByQueryParametrosPorIndice(curso3.getArea(), curso3.getNome());
+//		listCursoAreaInformadaPorIndice.forEach(curso -> System.out.println(curso));		
 		
 	}
 	

@@ -38,4 +38,38 @@ public class Materia {
 	)
 	private Set<GradeCurricular> grades = new HashSet<>();
 
+	public Materia() {
+		super();
+	}
+
+	public Materia(String nome, Set<GradeCurricular> grades) {
+		super();
+		this.nome = nome;
+		this.grades = grades;
+	}
+
+	public Integer getIdMateria() {
+		return idMateria;
+	}
+
+	public void setIdMateria(Integer idMateria) {
+		this.idMateria = idMateria;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Set<GradeCurricular> getGrades() {
+		return grades;
+	}
+
+	public void setGrades(Set<GradeCurricular> grades) {
+		this.grades = grades;
+	}
+
 }
