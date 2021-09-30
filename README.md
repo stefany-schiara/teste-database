@@ -448,3 +448,38 @@ public class GradeCurricular {
 ```
 
 @JoinColumn -  Anotação utilizada para informar quem é o dono da relação entre as tabelas, ou seja, no caso acima, a tabela "grade" vai receber uma coluna com a chave estrangeira "id_aluno"
+	
+@ManyToMany -  Anotação utilizada para mapear que uma coluna terá um relacionamento com outra tabela de "Muitos para Muitos".
+No exemplo que estamos fazendo, na classe Materia, estamos dizendo que várias matérias estarão presentes em várias grades curriculares.
+```
+@Entity
+@Table(name = "materia")
+public class Materia {
+	
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Column(name = "id_materia") 
+    private Integer idMateria; 
+	
+    @Column(name = "nome_materia", nullable = false) 
+    private String nome; 
+	
+    @ManyToMany() 
+    @JoinTable( 
+        name = "grade_materia", 
+	joinColumns = { 
+            @JoinColumn(name = "materia_id", referencedColumnName = "id_materia") 
+	}, 
+	inverseJoinColumns = { 
+	    @JoinColumn(name = "grade_id", referencedColumnName = "id_grade") 
+	} 			
+    ) 
+    private Set<GradeCurricular> grades = new HashSet<>(); 
+
+}
+```
+
+@JoinTable - Anotação utilizada para mapear que uma tabela será criada para mantes os relacionamentos, a tabela terá o nome de grade_materia
+que terá a junção das colunas id_materia da tabela materias e id_grade da tabela grade_curricular.
+O inverseJoinColumn é mapeando que a tabela materia receberá a FK da tabela grade_curricular , que é a coluna id_grade.
+
